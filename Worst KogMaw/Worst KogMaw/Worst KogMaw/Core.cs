@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Enumerations;
@@ -16,8 +17,11 @@ namespace Worst_KogMaw
     {
 
 
-        private Menu General, ConfigQ, ConfigW, ConfigE, ConfigR, Farmed, Draw;
+        private Menu General, ConfigQ, ConfigW, ConfigE, ConfigR, Farmed, Draw, Summ, SkinChanger, AutoLevell, Itemss;
         public Spell.Skillshot Q, E, R;
+        private Item Botrk, Bil, Youmu;
+        public static int[] SpellLevels;
+        public Spell.Active heal, barrier, cleanse;
         public Spell.Active W;
         public float QMANA = 0, WMANA = 0, EMANA = 0, RMANA = 0;
 
@@ -44,6 +48,17 @@ namespace Worst_KogMaw
             R.AllowedCollisionCount = int.MaxValue;
 
             General = MainMenu.AddMenu("Worst KogMaw", "Worst KogMaw");
+
+            SkinChanger = General.AddSubMenu("Skin Changer");
+            SkinChanger.Add("skinEnable", new CheckBox("Enable"));
+            SkinChanger.Add("skinID",
+                new ComboBox("Current Skin", 8, "0", "1", "2", "3",
+                    "4", "5", "6", "7", "8"));
+
+            AutoLevell = General.AddSubMenu("Auto Level Up");
+            AutoLevell.Add("ALEnable", new CheckBox("Enable"));
+            AutoLevell.Add("ALBox", new ComboBox("Level Up Mode", 0, "R>W>Q>E", "R>W>E>Q"));
+            AutoLevell.Add("Delay", new Slider("Max. delay value", 500, 0, 10000));
 
             ConfigQ = General.AddSubMenu("Q Config", "Qconfig");
             ConfigQ.Add("autoQ", new CheckBox("Auto Q"));
@@ -75,6 +90,19 @@ namespace Worst_KogMaw
             Farmed.Add("Mana", new Slider("LaneClear Mana", 80, 0, 100));
             Farmed.Add("jungleW", new CheckBox("Jungle Clear W"));
             Farmed.Add("jungleE", new CheckBox("Jungle Clear E"));
+
+            Summ = General.AddSubMenu("Summ. spells");
+            Summ.AddGroupLabel("Heal");
+            Summ.Add("Heal", new CheckBox("Enable heal"));
+            Summ.Add("AllyHeal", new CheckBox("Enable heal for Ally"));
+            Summ.Add("healhp", new Slider("Use Heal if HP < (%) ", 25, 0, 100));
+
+            Itemss = General.AddSubMenu("Items");
+            Itemss.Add("BilCombo", new CheckBox("Use Bilgewater Cutlass"));
+            Itemss.Add("YoumuCombo", new CheckBox("Use Youmuu's Ghostblade"));
+            Itemss.Add("BotrkCombo", new CheckBox("Use BOTRK"));
+            Itemss.Add("MyBotrkHp", new Slider("Min. HP for using BOTRK (%)", 50, 0, 100));
+            Itemss.Add("EnBotrkHp", new Slider("Min. Enemy HP for using BOTRK (%)", 50, 0, 100));
 
             Draw = General.AddSubMenu("Draw");
             Draw.Add("ComboInfo", new CheckBox("R killable info"));
@@ -302,6 +330,11 @@ namespace Worst_KogMaw
         {
             SetMana();
             Jungle();
+            Sum();
+            Skin();
+            AutoLevel();
+            Items();
+
 
             if (Q.IsReady() && ConfigQ["autoQ"].Cast<CheckBox>().CurrentValue)
             {
@@ -321,6 +354,14 @@ namespace Worst_KogMaw
                 LogicR();
             }
 
+        }
+
+        private void Skin()
+        {
+            if (SkinChanger["skinEnable"].Cast<CheckBox>().CurrentValue)
+            {
+                Player.SetSkinId(SkinChanger["skinID"].Cast<ComboBox>().CurrentValue);
+            }
         }
 
         private void LogicQ()
@@ -501,6 +542,137 @@ namespace Worst_KogMaw
                 RMANA = QMANA - Player.PARRegenRate * Q.Handle.Cooldown;
             else
                 RMANA = R.Handle.SData.Mana;
+        }
+
+        private void Sum()
+        {
+            var slotheal = Player.GetSpellSlotFromName("summonerheal");
+            if (slotheal != SpellSlot.Unknown)
+            {
+                heal = new Spell.Active(slotheal, 600);
+            }
+            var slotbar = Player.GetSpellSlotFromName("summonerbarrier");
+            if (slotbar != SpellSlot.Unknown)
+            {
+                barrier = new Spell.Active(slotbar, 0);
+            }
+            var slotboost = Player.GetSpellSlotFromName("summonerboost");
+            if (slotboost != SpellSlot.Unknown)
+            {
+                cleanse = new Spell.Active(slotboost, 0);
+            }
+
+            if (Summ["Heal"].Cast<CheckBox>().CurrentValue)
+            {
+                if (heal.IsReady() && Player.CountEnemiesInRange(800) >= 1 &&
+                    Player.HealthPercent <= Summ["healhp"].Cast<Slider>().CurrentValue)
+                {
+                    heal.Cast();
+                }
+            }
+            if (Summ["allyHeal"].Cast<CheckBox>().CurrentValue)
+            {
+                foreach (var ally in EntityManager.Heroes.Enemies.Where(x => !x.IsDead && x.IsValidTarget(800) && x.HealthPercent <= Summ["healhp"].Cast<Slider>().CurrentValue))
+                {
+                    if (heal.IsReady() && ally.CountEnemiesInRange(800) >= 1)
+                    {
+                        heal.Cast();
+                    }
+                }              
+            }
+        }
+
+        public void LevelUp(SpellSlot slot)
+        {
+            EloBuddy.SDK.Core.DelayAction(() =>
+            {
+                EloBuddy.Player.Instance.Spellbook.LevelSpell(slot);
+            }, new Random().Next(0, AutoLevell["Delay"].Cast<Slider>().CurrentValue));
+        }
+
+        private void AutoLevel()
+        {
+            if (!AutoLevell["ALEnable"].Cast<CheckBox>().CurrentValue)
+            {
+                return;
+            }
+
+            if (Player.ChampionName == "KogMaw")
+            {
+                if (AutoLevell["ALBox"].Cast<ComboBox>().CurrentValue == 0)
+                {
+                    SpellLevels = new int[] { 2, 1, 3, 2, 2, 4, 2, 3, 1, 1, 4, 1, 1, 3, 3, 4, 3, 3 };
+                }
+                if (AutoLevell["ALBox"].Cast<ComboBox>().CurrentValue == 1)
+                {
+                    SpellLevels = new int[] { 2, 3, 2, 1, 2, 4, 3, 2, 3, 3, 4, 3, 3, 1, 1, 4, 1, 1 };
+                }
+            }
+            var qLevel = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.Q).Level;
+            var wLevel = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.W).Level;
+            var eLevel = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.E).Level;
+            var rLevel = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.R).Level;
+
+            if (qLevel + wLevel + eLevel + rLevel >= ObjectManager.Player.Level)
+            {
+                return;
+            }
+
+            var level = new int[] { 0, 0, 0, 0 };
+            for (var i = 0; i < ObjectManager.Player.Level; i++)
+            {
+                level[SpellLevels[i] - 1] = level[SpellLevels[i] - 1] + 1;
+            }
+
+            if (qLevel < level[0])
+            {
+                LevelUp(SpellSlot.Q);
+            }
+            if (wLevel < level[1])
+            {
+                LevelUp(SpellSlot.W);
+            }
+
+            if (eLevel < level[2])
+            {
+                LevelUp(SpellSlot.E);
+            }
+
+            if (rLevel < level[3])
+            {
+                LevelUp(SpellSlot.R);
+            }
+        }
+        private void Items()
+        {
+            Botrk = new Item(3153, 450f);
+            Bil = new Item(3144, 450f);
+            Youmu = new Item(3142);
+
+            if (Combo)
+            {
+                var target = Orbwalker.GetTarget() as AIHeroClient;
+
+                if (Itemss["BotrkCombo"].Cast<CheckBox>().CurrentValue && Botrk.IsReady() && Botrk.IsOwned() &&
+                    target.IsValidTarget(450) &&
+                    (Player.HealthPercent <= Itemss["MyBotrkHp"].Cast<Slider>().CurrentValue ||
+                     target.HealthPercent < Itemss["EnBotrkHp"].Cast<Slider>().CurrentValue))
+                {
+                    Botrk.Cast(target);
+                }
+
+                if (Itemss["BilCombo"].Cast<CheckBox>().CurrentValue && Bil.IsOwned() && Bil.IsReady() &&
+                    target.IsValidTarget(450))
+                {
+                    Bil.Cast(target);
+                }
+
+                if (Itemss["YoumuCombo"].Cast<CheckBox>().CurrentValue && Youmu.IsOwned() && Youmu.IsReady() &&
+                    target.IsValidTarget())
+                {
+                    Youmu.Cast();
+                }
+            }
         }
     }
 }
