@@ -1,0 +1,11 @@
+C:\Users\Наталья\Addons\Worst Ashe\Worst Ashe\bin\Debug\Worst Ashe.exe.config
+C:\Users\Наталья\Addons\Worst Ashe\Worst Ashe\bin\Debug\Worst Ashe.exe
+C:\Users\Наталья\Addons\Worst Ashe\Worst Ashe\bin\Debug\Worst Ashe.pdb
+C:\Users\Наталья\Addons\Worst Ashe\Worst Ashe\bin\Debug\EloBuddy.dll
+C:\Users\Наталья\Addons\Worst Ashe\Worst Ashe\bin\Debug\EloBuddy.SDK.dll
+C:\Users\Наталья\Addons\Worst Ashe\Worst Ashe\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\Наталья\Addons\Worst Ashe\Worst Ashe\bin\Debug\SharpDX.dll
+C:\Users\Наталья\Addons\Worst Ashe\Worst Ashe\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Наталья\Addons\Worst Ashe\Worst Ashe\obj\Debug\Worst Ashe.csprojResolveAssemblyReference.cache
+C:\Users\Наталья\Addons\Worst Ashe\Worst Ashe\obj\Debug\Worst Ashe.exe
+C:\Users\Наталья\Addons\Worst Ashe\Worst Ashe\obj\Debug\Worst Ashe.pdb
