@@ -19,7 +19,7 @@ namespace Worst_KogMaw
             if (EloBuddy.Player.Instance.ChampionName == "KogMaw")
             {
                 new Core().Load();
-                Chat.Print("Worst KogMaw loaded 1.0.0.1", color.Color.Red);
+                Chat.Print("Worst KogMaw loaded 1.0.0.2", color.Color.Red);
             }
 
 
