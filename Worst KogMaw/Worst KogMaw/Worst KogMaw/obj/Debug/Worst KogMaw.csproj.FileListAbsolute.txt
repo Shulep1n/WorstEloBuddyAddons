@@ -1,0 +1,11 @@
+C:\Users\Наталья\Addons\Worst KogMaw\Worst KogMaw\Worst KogMaw\bin\Debug\Worst KogMaw.exe.config
+C:\Users\Наталья\Addons\Worst KogMaw\Worst KogMaw\Worst KogMaw\bin\Debug\Worst KogMaw.exe
+C:\Users\Наталья\Addons\Worst KogMaw\Worst KogMaw\Worst KogMaw\bin\Debug\Worst KogMaw.pdb
+C:\Users\Наталья\Addons\Worst KogMaw\Worst KogMaw\Worst KogMaw\bin\Debug\EloBuddy.dll
+C:\Users\Наталья\Addons\Worst KogMaw\Worst KogMaw\Worst KogMaw\bin\Debug\EloBuddy.SDK.dll
+C:\Users\Наталья\Addons\Worst KogMaw\Worst KogMaw\Worst KogMaw\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\Наталья\Addons\Worst KogMaw\Worst KogMaw\Worst KogMaw\bin\Debug\SharpDX.dll
+C:\Users\Наталья\Addons\Worst KogMaw\Worst KogMaw\Worst KogMaw\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Наталья\Addons\Worst KogMaw\Worst KogMaw\Worst KogMaw\obj\Debug\Worst KogMaw.csprojResolveAssemblyReference.cache
+C:\Users\Наталья\Addons\Worst KogMaw\Worst KogMaw\Worst KogMaw\obj\Debug\Worst KogMaw.exe
+C:\Users\Наталья\Addons\Worst KogMaw\Worst KogMaw\Worst KogMaw\obj\Debug\Worst KogMaw.pdb
