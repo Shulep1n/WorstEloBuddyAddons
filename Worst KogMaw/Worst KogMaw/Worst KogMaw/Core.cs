@@ -330,7 +330,7 @@ namespace Worst_KogMaw
         {
             SetMana();
             Jungle();
-            Sum();
+            //Sum();
             Skin();
             AutoLevel();
             Items();
