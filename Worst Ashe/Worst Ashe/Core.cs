@@ -464,7 +464,7 @@ namespace Worst_Ashe
             }
         } 
 
-        private void Sum()
+        /* private void Sum()
         {
             var slotheal = Player.GetSpellSlotFromName("summonerheal");
             if (slotheal != SpellSlot.Unknown)
@@ -501,7 +501,7 @@ namespace Worst_Ashe
                     }
                 }
             }
-        }
+        } */
 
         public void LevelUp(SpellSlot slot)
         {
