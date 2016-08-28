@@ -101,11 +101,11 @@ namespace Worst_Ashe
             Itemss.Add("MyBotrkHp", new Slider("Min. HP for using BOTRK (%)", 50, 0, 100));
             Itemss.Add("EnBotrkHp", new Slider("Min. Enemy HP for using BOTRK (%)", 50, 0, 100));
 
-            Summ = General.AddSubMenu("Summ. spells");
+            /*Summ = General.AddSubMenu("Summ. spells");
             Summ.AddGroupLabel("Heal");
             Summ.Add("Heal", new CheckBox("Enable heal"));
             Summ.Add("AllyHeal", new CheckBox("Enable heal for Ally"));
-            Summ.Add("healhp", new Slider("Use Heal if HP < (%) ", 25, 0, 100)); 
+            Summ.Add("healhp", new Slider("Use Heal if HP < (%) ", 25, 0, 100)); */
 
 
             Draw = General.AddSubMenu("Draw");
