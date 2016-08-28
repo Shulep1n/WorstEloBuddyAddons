@@ -219,7 +219,7 @@ namespace Worst_Ashe
             Jungle();
             Skin();
             Items();
-            Sum();
+            //Sum();
             AutoLevel();
             Hawk();
             
