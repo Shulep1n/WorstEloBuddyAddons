@@ -21,7 +21,7 @@ namespace Worst_Ase
             if (ObjectManager.Player.ChampionName == "Ashe")
             {
                 new Core().Load();
-                Chat.Print("Worst Ashe loaded 1.0.0.2", color.Color.Red);
+                Chat.Print("Worst Ashe loaded_1.0.0.2", color.Color.Red);
             }
         }
     }
