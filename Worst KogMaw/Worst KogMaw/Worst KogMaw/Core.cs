@@ -91,11 +91,11 @@ namespace Worst_KogMaw
             Farmed.Add("jungleW", new CheckBox("Jungle Clear W"));
             Farmed.Add("jungleE", new CheckBox("Jungle Clear E"));
 
-            Summ = General.AddSubMenu("Summ. spells");
+           /* Summ = General.AddSubMenu("Summ. spells");
             Summ.AddGroupLabel("Heal");
             Summ.Add("Heal", new CheckBox("Enable heal"));
             Summ.Add("AllyHeal", new CheckBox("Enable heal for Ally"));
-            Summ.Add("healhp", new Slider("Use Heal if HP < (%) ", 25, 0, 100));
+            Summ.Add("healhp", new Slider("Use Heal if HP < (%) ", 25, 0, 100)); */
 
             Itemss = General.AddSubMenu("Items");
             Itemss.Add("BilCombo", new CheckBox("Use Bilgewater Cutlass"));
@@ -544,7 +544,7 @@ namespace Worst_KogMaw
                 RMANA = R.Handle.SData.Mana;
         }
 
-        private void Sum()
+        /* private void Sum()
         {
             var slotheal = Player.GetSpellSlotFromName("summonerheal");
             if (slotheal != SpellSlot.Unknown)
@@ -580,7 +580,7 @@ namespace Worst_KogMaw
                     }
                 }              
             }
-        }
+        } */
 
         public void LevelUp(SpellSlot slot)
         {
