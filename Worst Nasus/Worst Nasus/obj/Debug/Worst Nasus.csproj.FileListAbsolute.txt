@@ -1,0 +1,10 @@
+C:\Users\HOST-PC\Documents\Visual Studio 2015\Worst Nasus\Worst Nasus\bin\Debug\Worst Nasus.exe.config
+C:\Users\HOST-PC\Documents\Visual Studio 2015\Worst Nasus\Worst Nasus\bin\Debug\Worst Nasus.exe
+C:\Users\HOST-PC\Documents\Visual Studio 2015\Worst Nasus\Worst Nasus\bin\Debug\Worst Nasus.pdb
+C:\Users\HOST-PC\Documents\Visual Studio 2015\Worst Nasus\Worst Nasus\bin\Debug\EloBuddy.dll
+C:\Users\HOST-PC\Documents\Visual Studio 2015\Worst Nasus\Worst Nasus\bin\Debug\EloBuddy.SDK.dll
+C:\Users\HOST-PC\Documents\Visual Studio 2015\Worst Nasus\Worst Nasus\bin\Debug\SharpDX.dll
+C:\Users\HOST-PC\Documents\Visual Studio 2015\Worst Nasus\Worst Nasus\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\HOST-PC\Documents\Visual Studio 2015\Worst Nasus\Worst Nasus\bin\Debug\Newtonsoft.Json.dll
+C:\Users\HOST-PC\Documents\Visual Studio 2015\Worst Nasus\Worst Nasus\obj\Debug\Worst Nasus.exe
+C:\Users\HOST-PC\Documents\Visual Studio 2015\Worst Nasus\Worst Nasus\obj\Debug\Worst Nasus.pdb
