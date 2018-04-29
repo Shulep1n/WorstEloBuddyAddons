@@ -25,7 +25,7 @@ namespace Worst_Ashe
         private Obj_AI_Base RTarget = null;
         public Spell.Active Q;
         public Spell.Skillshot W, E, R;
-        public float QMANA = 0, WMANA = 0, EMANA = 0, RMANA = 0;
+        private float QMANA = 0, WMANA = 0, EMANA = 0, RMANA = 0;
 
         public AIHeroClient Player
         {
